@@ -2017,6 +2017,12 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
+@media (min-width: 761px) {
+  .explore-panel {
+    display: none;
+  }
+}
+
 @media (max-width: 760px) {
   .app {
     --player-h: 78px;

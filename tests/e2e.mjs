@@ -137,14 +137,23 @@ try {
   // Ripristina uno zoom ragionevole per gli screenshot
   await page.evaluate(() => {
     const element = document.querySelector(".globe");
+    const current = window.__ondaGlobe.getRotation().zoom;
     element.dispatchEvent(
-      new WheelEvent("wheel", { deltaY: 2000, bubbles: true, cancelable: true }),
-    );
-    element.dispatchEvent(
-      new WheelEvent("wheel", { deltaY: -150, bubbles: true, cancelable: true }),
+      new WheelEvent("wheel", {
+        deltaY: (current - 1) / 0.0011,
+        bubbles: true,
+        cancelable: true,
+      }),
     );
   });
-  await page.waitForTimeout(200);
+  await page.waitForTimeout(300);
+  const zoomReset = await page.evaluate(
+    () => window.__ondaGlobe.getRotation().zoom,
+  );
+  assert(
+    zoomReset < 1.2,
+    `lo zoom deve tornare vicino a 1, trovato ${zoomReset}`,
+  );
 
   // PWA
   const manifest = await page.evaluate(async () => {
@@ -171,10 +180,10 @@ try {
     fullPage: false,
   });
 
-  // Seleziona l'Amazzonia dal pannello esplora
-  await page
-    .locator('.explore-row', { hasText: "Amazzonia" })
-    .click();
+  // Seleziona l'Amazzonia dalla vista Luoghi
+  await page.getByRole("button", { name: "Luoghi" }).first().click();
+  await page.waitForSelector(".place-card");
+  await page.getByRole("button", { name: "Apri Amazzonia", exact: true }).click();
   await page.waitForSelector('.place-panel[aria-label="Dettagli di Amazzonia"]');
   assert(
     (await page.locator(".panel-heading h2").innerText()) === "Amazzonia",
@@ -299,9 +308,8 @@ try {
     .getByRole("button", { name: "Atlante" })
     .first()
     .click();
-  await page
-    .locator('.explore-row', { hasText: "Amazzonia" })
-    .click();
+  await page.getByRole("button", { name: "Luoghi" }).first().click();
+  await page.getByRole("button", { name: "Apri Amazzonia", exact: true }).click();
   await page.getByRole("button", { name: /Ascolta questo luogo/ }).click();
   await page.waitForTimeout(1400);
 

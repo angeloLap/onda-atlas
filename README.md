@@ -2,6 +2,8 @@
 
 **La Terra non si ascolta. Si attraversa.**
 
+**Live:** https://angelolap.github.io/onda-atlas/
+
 Un atlante sonoro del pianeta: un globo terrestre interattivo, sei luoghi reali e sei paesaggi sonori generati nel browser. Nessun catalogo, nessun account, nessuna API, nessun file audio.
 
 Costruito come risposta creativa al test “clonare Spotify con REA”: invece di analizzare un client proprietario, qui l'idea è stata trasformata in un prodotto originale con un'identità propria.
@@ -66,6 +68,20 @@ npm run icons
 ```
 
 Per il deploy servono **HTTPS** (o localhost) e, se pubblichi in una sottocartella, vanno aggiornati `start_url`, `scope`, i percorsi del manifest e lo scope del service worker.
+
+## Deploy su GitHub Pages
+
+Il progetto è pubblicato su:
+
+**https://angelolap.github.io/onda-atlas/**
+
+La build per la sottocartella `/onda-atlas/` si genera con:
+
+```bash
+npm run build:pages
+```
+
+Il contenuto di `dist/` va pubblicato sul branch `gh-pages`. Il manifest usa percorsi relativi e il service worker ricava lo scope da `self.registration.scope`, quindi la stessa build funziona sia in radice sia in sottocartella.
 
 ## Test
 
