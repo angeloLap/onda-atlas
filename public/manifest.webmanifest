@@ -1,0 +1,36 @@
+{
+  "id": "./",
+  "name": "Onda Atlas — atlante sonoro",
+  "short_name": "Onda Atlas",
+  "description": "Un atlante sonoro del pianeta: globo terrestre, sei luoghi e paesaggi sonori generativi.",
+  "lang": "it",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#050d13",
+  "theme_color": "#07141c",
+  "categories": ["music", "entertainment", "travel"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
